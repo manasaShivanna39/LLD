@@ -16,4 +16,20 @@ public class Seat {
         this.seatType = seatType;
         this.price = price;
     }
+
+    public String getId() {
+        return id;
+    }
+
+    public SeatStatus getSeatStatus() {
+        return seatStatus;
+    }
+
+    public void setSeatStatus(SeatStatus seatStatus) {
+        this.seatStatus = seatStatus;
+    }
+
+    public double getPrice() {
+        return price;
+    }
 }
