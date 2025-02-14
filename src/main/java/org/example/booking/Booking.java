@@ -21,6 +21,15 @@ public class Booking {
         this.bookingStatus = bookingStatus;
     }
 
+    public String getId() {
+        return id;
+    }
 
+    public BookingStatus getBookingStatus() {
+        return bookingStatus;
+    }
 
+    public void setBookingStatus(BookingStatus bookingStatus) {
+        this.bookingStatus = bookingStatus;
+    }
 }

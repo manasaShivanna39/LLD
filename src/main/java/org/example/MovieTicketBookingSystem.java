@@ -11,13 +11,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
 
 public class MovieTicketBookingSystem {
-    private MovieTicketBookingSystem instance;
+    private static MovieTicketBookingSystem instance;
     private List<Movie> movies;
-    private List<Theatre> theatres;
+    private List<Theater> theaters;
     //because we need user to select
     private Map<String, Show> shows;
     //check why is it HashMap
@@ -27,12 +26,12 @@ public class MovieTicketBookingSystem {
 
     public MovieTicketBookingSystem() {
         movies = new ArrayList<>();
-        theatres = new ArrayList<>();
+        theaters = new ArrayList<>();
         shows = new ConcurrentHashMap<>();
         bookings = new ConcurrentHashMap<>();
     }
 
-    public synchronized MovieTicketBookingSystem getInstance() {
+    public static synchronized MovieTicketBookingSystem getInstance() {
         if (instance == null) {
             instance = new MovieTicketBookingSystem();
         }
@@ -43,8 +42,12 @@ public class MovieTicketBookingSystem {
         movies.add(movie);
     }
 
-    public void addTheatres(Theatre theatre) {
-        theatres.add(theatre);
+    public void addTheater(Theater theater) {
+        theaters.add(theater);
+    }
+
+    public void addShow(Show show){
+        shows.put(show.getId(),show);
     }
 
     public void addShows(Show show) {
@@ -94,6 +97,10 @@ public class MovieTicketBookingSystem {
     }
 
 
+    public void confirmBooking(Booking booking) {
+        if(booking!=null && booking.getBookingStatus()==BookingStatus.PENDING){
+            booking.setBookingStatus(BookingStatus.CONFIRMED);
+        }
 
-
+    }
 }
